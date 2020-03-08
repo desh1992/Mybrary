@@ -24,9 +24,7 @@ app.use(express.static('public'));
 //integrate mongodb to our app
 const mongoose = require('mongoose');
 //setup connections for database
-mongoose.connect(process.env.DATABASE_URL, {
-	useNewUrlParser: true
-});
+mongoose.connect(process.env.DATABASE_URL);
 //access the connection
 const db = mongoose.connection;
 //if we run into an error while connecting to our database
