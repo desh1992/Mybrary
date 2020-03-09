@@ -8,12 +8,14 @@
 </head>
 <body>
     <!-- Common header code for app  -->
-    before
+    <%- include('../partials/header.ejs') %>  
+    <!-- Common Error tag -->
+    <%- include('../partials/errorMessage.ejs') %> 
     <br>
     <!-- Content of all pages of app goes here -->
     <%- body %> 
     <br>
     <!-- Common footer code for app  --> 
-    after
+    
 </body>
 </html>
