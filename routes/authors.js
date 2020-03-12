@@ -5,9 +5,23 @@ const Author = require('../models/author');
 
 //we can create our routes
 //All authors route
-router.get('/', (req, res) => {
-	//Render our view index.ejs
-	res.render('authors/index');
+router.get('/', async (req, res) => {
+	//Create search options to search parameter(we have only name)
+	let searchOptions = {}
+	if (req.query.name != null && req.query.name !== '') {
+		searchOptions.name = new RegExp(req.query.name, 'i')
+	}
+	try {
+		const authors = await Author.find(searchOptions)
+		//Render our view index.ejs
+		res.render('authors/index', {
+			authors: authors,
+			searchOptions: req.query
+		});
+	} catch {
+		res.redirect('/')
+	}
+	
 });
 
 //New Author Route for displaying the form
@@ -23,7 +37,7 @@ router.post('/', async (req, res) => {
 	try {
 		const newAuthor = await author.save()
 		// res.redirect(`/authors/${newAuthor.id}`)
-		res.redirect('authors')
+		res.redirect(`authors`)
 	} catch{
 		res.render('authors/new', {
 			author: author,	//repopulating the new author name entered
