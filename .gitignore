@@ -2,3 +2,5 @@
 .env
 # node module
 node_modules
+# public folder
+public/uploads
