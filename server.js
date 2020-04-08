@@ -14,6 +14,8 @@ const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 //for author
 const authorRouter = require('./routes/authors');
+//for book
+const bookRouter = require('./routes/books');
 
 //set our view engine
 app.set('view engine', 'ejs', {
@@ -48,6 +50,8 @@ db.once('open', () => console.log('connected to mongoose'));
 app.use('/', indexRouter);
 //tell app to use router for authors
 app.use('/authors', authorRouter);
+//tell app to use router for books
+app.use('/books', bookRouter);
 
 //tell app we want to listen on PORT
 app.listen(process.env.PORT || 3000);
