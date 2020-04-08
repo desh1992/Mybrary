@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 //import path to access file structure
-const path = require('path');
+// const path = require('path');
 //variable to store all cover image
-const coverImageBasePath = 'uploads/bookCovers';
+// const coverImageBasePath = 'uploads/bookCovers';
 
 //create schema(In MONGODB schema is same as table in database)
 const bookSchema = new mongoose.Schema({
@@ -31,9 +31,13 @@ const bookSchema = new mongoose.Schema({
 		//set default date to current date so user don't have to add date every time create new book
 		default: Date.now
 	},
-	coverImageName: {
+	coverImage: {
 		// instead of passing the image itself to the database we are passing the name of image as a
 		// small string and can store actual string on our server in file system
+		type: Buffer,
+		required: true
+	},
+	coverImageType: {
 		type: String,
 		required: true
 	},
@@ -47,17 +51,17 @@ const bookSchema = new mongoose.Schema({
 	}
 });
 
-//Create a virtual propert
-//it will allow us to access(derive) all the variables we have in our book schema
-//when we call book.coverImagepath it will call function inside the get function
+// Create a virtual propert
+// it will allow us to access(derive) all the variables we have in our book schema
+// when we call book.coverImagepath it will call function inside the get function
 bookSchema.virtual('coverImagePath').get(function() {
 	//we are using simple function so we can use (this.)
 	//path.join will combine
 	//'/' -> base folder location
 	//'coverImageBasePath' -> cover image path
 	// 'this.coverImageName' -> image name
-	if (this.coverImageName != null) {
-		return path.join('/', coverImageBasePath, this.coverImageName);
+	if (this.coverImage != null && this.coverImageType != null) {
+		return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`;
 	}
 });
 
@@ -65,4 +69,4 @@ bookSchema.virtual('coverImagePath').get(function() {
 module.exports = mongoose.model('Book', bookSchema);
 //export cover image path variable
 //we dont want to import it as default, we want to import it as variable name
-module.exports.coverImageBasePath = coverImageBasePath;
+// module.exports.coverImageBasePath = coverImageBasePath;
