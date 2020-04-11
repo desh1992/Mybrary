@@ -1,0 +1,8 @@
+<h2>Edit Author</h2>
+<form action="/authors/<%= author.id %>?_method=PUT" method="POST">
+    <!-- common input tag for NEW and EDIT file -->
+    <%- include('_form_fields')  %> 
+    <!-- Cancel Button(link) take back us to our author list view -->
+    <a href="/authors/<%= author.id %> ">Cancel</a>
+    <button type="submit">Update</button>
+</form>

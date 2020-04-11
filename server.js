@@ -8,6 +8,7 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts');
 //express has no easy way to access variables
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 //import router into server
 //for index
@@ -27,6 +28,8 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 //tell app need to use express layout
 app.use(expressLayouts);
+//tell app to use method-override library
+app.use(methodOverride('_method'));
 //tell app where our public files(HTML, CSS, JAVASCRIPT, IMAGES) going to be
 app.use(express.static('public'));
 //tell express how to use body parser

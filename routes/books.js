@@ -120,7 +120,6 @@ function saveCover(book, coverEncoded) {
 	if (cover != null && imageMimeTypes.includes(cover.type)) {
 		book.coverImage = new Buffer.from(cover.data, 'base64');
 		book.coverImageType = cover.type;
-		console.log('book object', book);
 	}
 }
 
