@@ -1,7 +1,7 @@
-<h2>Edit Book</h2>
+<h2 class="page-header">Edit Book</h2>
 <form action="/books/<%= book.id %>?_method=PUT" method="POST">
     <!-- common input tag for NEW and EDIT file -->
-    <%- include('_form_fields')  %> 
+    <%- include('_form_fields')  %>
     <!-- Cancel Button(link) take back us to our author list view -->
     <a href="/books">Cancel</a>
     <button type="submit">Update</button>
